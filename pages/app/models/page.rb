@@ -11,6 +11,10 @@ class Page < ActiveRecord::Base
   # when collecting the pages path how is each of the pages seperated?
   PATH_SEPARATOR = " - "
 
+  def translation
+    translations.find_or_initialize_by_locale(locale.to_s)
+  end
+
   if self.respond_to?(:translates)
     translates :title, :custom_title, :meta_keywords, :meta_description, :browser_title, :include => :seo_meta
 
