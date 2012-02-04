@@ -26,7 +26,7 @@ development:
 
 test:
   <<: *login
-  database: dummy_test
+  database: <%= %w(mysql postgresql).include?(database) ? 'dummy_test' : "':memory:'" %>
 
 production:
   <<: *login
