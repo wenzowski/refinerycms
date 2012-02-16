@@ -123,7 +123,7 @@ Devise.setup do |config|
 
   # ==> Configuration for :validatable
   # Range for password length. Default is 6..128.
-  config.password_length = 4..20
+  config.password_length = 4..128
 
   # Email regex used to validate email formats. It simply asserts that
   # an one (and only one) @ exists in the given string. This is mainly
@@ -223,5 +223,7 @@ Devise.setup do |config|
   #   manager.default_strategies(:scope => :user).unshift :some_external_strategy
   # end
 
+  # Please do not change the router_name away from :refinery
+  # otherwise Refinery may not function properly. Thanks!
   config.router_name = :refinery
 end
