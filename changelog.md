@@ -1,12 +1,33 @@
-## 2.0.0 [unreleased]
+## 2.0.1 [6 March 2012]
+
+* Updated `plugin.url` code to support Rails 3.2.2. [Philip Arndt](https://github.com/parndt)
+* Added guard-spork '0.5.2' dependency to refinerycms-testing. [Joe Sak](https://github.com/joemsak)
+* Added support for '.' in usernames. [Philip Arndt](https://github.com/parndt)
+* Now includes application.js by default. [Nick Romanowski](https://github.com/nodabs)
+* [See full list](https://github.com/resolve/refinerycms/compare/2.0.0...2.0.1)
+
+## 2.0.0 [29 February 2012]
 
 * Remove jquery_include_tags helper in favor of using jquery from jquery-rails gem. [Uģis Ozols](https://github.com/ugisozols)
 * Finally removed `Page#[]` in favour of `Page#content_for` so instead of `@page[:body]` it's `@page.content_for(:body)`. [Philip Arndt](https://github.com/parndt)
 * Moved everything under Refinery namespace. [wakeless](https://github.com/wakeless)
 * Renamed `RefinerySetting` to `Refinery::Setting`. [Philip Arndt](https://github.com/parndt)
-* Added `--trace` option to bin/refinerycms. [Steven Heidel](http://github.com/stevenheidel)
+* Added `rails g refinery:form` generator for form textensions. [Philip Arndt](https://github.com/parndt)
 * Moved `/shared/*` to `/refinery/*` instead, including `/shared/admin/*` to `/refinery/admin/*` as it makes more sense. [Philip Arndt](https://github.com/parndt)
-* [See full list](https://github.com/resolve/refinerycms/compare/1.0.8...master)
+* `vendor/engines` is now `vendor/extensions`. [Philip Arndt](https://github.com/parndt)
+* Extensions are now generated with testing support built in via a dummy refinery installation. [Jamie Winsor](https://github.com/reset)
+* Refinery is now mountable at a custom path. [Uģis Ozols](https://github.com/ugisozols)
+* [See full list](https://github.com/resolve/refinerycms/compare/1.0.9...master) if you dare.
+* [See explanation of changes](https://github.com/resolve/refinerycms/wiki/Changelog).
+
+## 1.0.9 [5 November 2011]
+
+* `guard` testing strategy ported from edge for testing refinery from its own directory without a dummy app. [Jamie Winsor](https://github.com/resetexistence) & [Joe Sak](https://github.com/joemsak)
+* WYMEditor bug fixes [Nic Haynes](https://github.com/nicinabox)
+* Bulgarian translations added. [Miroslav Rachev](https://github.com/mirosr)
+* Fixed --heroku command. [Garrett Heinlen](https://github.com/gogogarrett)
+* Refactored plugins code to add Ruby 1.9.3 support. [Amanda Wagener](https://github.com/awagener)
+* [See full list](https://github.com/resolve/refinerycms/compare/1.0.8...1.0.9)
 
 ## 1.0.8 [1 September 2011]
 
@@ -81,7 +102,7 @@
 * Implemented `:translator` role which allows a particular user access only to translate pages. [Philip Arndt](https://github.com/parndt)
 * Added support for `Dragonfly 0.9.0` which uses the 'fog' gem. [Jesper Hvirring Henriksen](https://github.com/hvirring)
 * Updated all `refinery/admin.js` functions to make use of 'initialised'. [Mark Haylock](https://github.com/mhaylock)
-* Using SEO form from `seo_meta` inside pages' advanced options rather than having it duplicated in the RefineryCMS codebase too. [Uģis Ozols](https://github.com/ugisozols)
+* Using SEO form from `seo_meta` inside pages' advanced options rather than having it duplicated in the Refinery CMS codebase too. [Uģis Ozols](https://github.com/ugisozols)
 * [See full list](https://github.com/resolve/refinerycms/compare/0.9.9.21...0.9.9.22)
 
 ## 0.9.9.21 [03 May 2011]
@@ -504,7 +525,7 @@
 
 ## 0.9.7.5 [08 July 2010]
 
-* Wrote an upgrade task for migrating from 0.9.6.x releases of RefineryCMS. Just run refinery-update-096-to-097 inside your application's directory. [Philip Arndt](https://github.com/parndt)
+* Wrote an upgrade task for migrating from 0.9.6.x releases of Refinery CMS. Just run refinery-update-096-to-097 inside your application's directory. [Philip Arndt](https://github.com/parndt)
 * Improved code used to include gem rake tasks and script/generate tasks into the Refinery application to fix issue with these tasks not being found. [Philip Arndt](https://github.com/parndt)
 * Fixed a broken migration that would mean pages were missing upon upgrading. [Jesper Hvirring Henriksen](https://github.com/hvirring)
 * More pt-BR translation keys translated. [Kivanio Barbosa](https://github.com/kivanio)

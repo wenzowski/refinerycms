@@ -23,9 +23,9 @@ module Refinery
 
         click_link ::I18n.t('create_new_image', :scope => 'refinery.admin.images.actions')
 
-        page.should have_selector('iframe#dialog_iframe')
+        page.should have_selector 'iframe#dialog_iframe'
 
-        page.within_frame "dialog_iframe" do
+        page.within_frame('dialog_iframe') do
           attach_file "image_image", Refinery.roots(:'refinery/images').
                                               join("spec/fixtures/image-with-dashes.jpg")
           click_button ::I18n.t('save', :scope => 'refinery.admin.form_actions')

@@ -13,7 +13,7 @@
       cancel_title = t('.cancel_lose_changes')
     end
     cancel_button_id    ||= "cancel_button"
-    cancel_url          ||= (((back = url_for(:back)).include?('javascript') or action_name =~ /^(create|update)$/) ? refinery.send(Refinery.route_for_model(f.object.class)) : back)
+    cancel_url          ||= (((back = url_for(:back)).include?('javascript') or action_name =~ /^(create|update)$/) ? refinery.send(Refinery.route_for_model(f.object.class, true)) : back)
   end
 
   continue_editing = defined?(continue_editing) ? continue_editing : (f.object.present? and f.object.persisted?)
@@ -46,7 +46,7 @@
                    :class => "wymupdate button",
                    :tooltip => submit_button_title unless hide_submit %>
 
-    <%= render :partial => "/refinery/admin/continue_editing", :locals => {:f => f} if continue_editing -%>
+    <%= render '/refinery/admin/continue_editing', :f => f if continue_editing -%>
     <%= hidden_field_tag :continue_editing, false if continue_editing %>
 
     <%= local_assigns[:before_cancel_button] -%>

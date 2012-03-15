@@ -7,7 +7,8 @@ module Refinery
       engine_name :refinery
 
       class << self
-        # Require/load (based on Rails app.config) all decorators from app/decorators/ and vendor/engines/*
+        # Require/load (based on Rails app.config) all decorators from app/decorators/
+        # and from registered plugins' paths too.
         def load_decorators
           [Rails.root, Refinery::Plugins.registered.pathnames].flatten.map { |p|
             Dir[p.join('app', 'decorators', '**', '*_decorator.rb')]
@@ -25,6 +26,10 @@ module Refinery
 
           [::ApplicationController, Refinery::AdminController].each do |c|
             c.send :include, Refinery::ApplicationController
+            c.send :helper, Refinery::Core::Engine.helpers
+          end
+
+          [Refinery::UsersController, Refinery::SessionsController, Refinery::PasswordsController].each do |c|
             c.send :helper, Refinery::Core::Engine.helpers
           end
 
@@ -131,7 +136,17 @@ module Refinery
       end
 
       config.after_initialize do
-        Refinery.register_engine(Refinery::Core)
+        Refinery.register_extension(Refinery::Core)
+      end
+
+      # We need to reload the routes here due to how Refinery sets them up
+      # The different facets of Refinery (dashboard, pages, etc.) append/prepend routes to Core
+      # *after* Core has been loaded.
+      #
+      # So we wait until after initialization is complete to do one final reload
+      # This then makes the appended/prepended routes available to the application.
+      config.after_initialize do
+        Rails.application.routes_reloader.reload!
       end
     end
   end
