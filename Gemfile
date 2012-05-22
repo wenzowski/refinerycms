@@ -3,35 +3,35 @@ source 'http://rubygems.org'
 gemspec
 
 # Add i18n support.
-gem 'refinerycms-i18n', '~> 2.1.0.dev', :git => 'git://github.com/parndt/refinerycms-i18n.git'
+# gem 'refinerycms-i18n', '~> 2.1.0.dev', github: 'parndt/refinerycms-i18n'
 
 # Fixes uniqueness constraint on translated columns.
 # See: https://github.com/svenfuchs/globalize3/pull/121
-gem 'globalize3', :git => 'git://github.com/svenfuchs/globalize3.git', :branch => 'master'
-
-gem 'quiet_assets', :group => :development
+gem 'globalize3', github: 'svenfuchs/globalize3'
+gem 'paper_trail', github: 'parndt/paper_trail', branch: 'rails4'
+gem 'devise', github: 'parndt/devise', branch: 'rails4'
 
 # Database Configuration
 unless ENV['TRAVIS']
-  gem 'activerecord-jdbcsqlite3-adapter', :platform => :jruby
-  gem 'sqlite3', :platform => :ruby
+  gem 'activerecord-jdbcsqlite3-adapter', platform: :jruby
+  gem 'sqlite3', platform: :ruby
 end
 
 unless ENV['TRAVIS'] && ENV['DB'] != 'mysql'
-  gem 'activerecord-jdbcmysql-adapter', :platform => :jruby
-  gem 'mysql2', :platform => :ruby
+  gem 'activerecord-jdbcmysql-adapter', platform: :jruby
+  gem 'mysql2', platform: :ruby
 end
 
 unless ENV['TRAVIS'] && ENV['DB'] != 'postgresql'
-  gem 'activerecord-jdbcpostgresql-adapter', :platform => :jruby
-  gem 'pg', :platform => :ruby
+  gem 'activerecord-jdbcpostgresql-adapter', platform: :jruby
+  gem 'pg', platform: :ruby
 end
 
-gem 'jruby-openssl', :platform => :jruby
+gem 'jruby-openssl', platform: :jruby
 
 group :development, :test do
   gem 'refinerycms-testing', '~> 2.1.0.dev'
-  gem 'generator_spec', '>= 0.8.5', :git => 'git://github.com/stevehodgkiss/generator_spec.git'
+  gem 'generator_spec', '>= 0.8.5', github: 'stevehodgkiss/generator_spec'
   gem 'guard-rspec', '~> 0.7.0'
   gem 'fuubar', '~> 1.0.0'
 
@@ -76,9 +76,9 @@ end
 # Gems used only for assets and not required
 # in production environments by default.
 group :assets do
-  gem 'sass-rails'
-  gem 'coffee-rails'
-  gem 'uglifier'
+  gem 'sass-rails', github: 'rails/sass-rails'
+  gem 'coffee-rails', github: 'rails/coffee-rails'
+  gem 'uglifier', '>= 1.0.3', require: false
 end
 
 gem 'jquery-rails', '~> 2.0.0'
@@ -91,17 +91,29 @@ gem 'jquery-rails', '~> 2.0.0'
 # gem 'capistrano'
 
 # To use debugger
-# gem 'ruby-debug', :platform => :mri_18
+# gem 'ruby-debug', platform: :mri_18
 # or in 1.9.x:
-# gem 'ruby-debug19', :platform => :mri_19
+# gem 'ruby-debug19', platform: :mri_19
 
 # For Heroku/s3:
 # gem 'fog'
 
 # Bundle edge Rails instead:
-# gem 'rails', :git => 'git://github.com/rails/rails.git', :branch => '3-1-stable'
-# gem 'rack', :git => 'git://github.com/rack/rack.git'
-# gem 'arel', :git => 'git://github.com/rails/arel.git'
+gem 'rails', github: 'rails/rails'
+if ENV['JOURNEY']
+  gem 'journey', path: ENV['JOURNEY']
+else
+  gem 'journey', github: "rails/journey"
+end
+
+if ENV['AR_DEPRECATED_FINDERS']
+  gem 'active_record_deprecated_finders', path: ENV['AR_DEPRECATED_FINDERS']
+else
+  gem 'active_record_deprecated_finders', github: 'rails/active_record_deprecated_finders'
+end
+
+# gem 'rack', github: 'rack/rack'
+# gem 'arel', github: 'rails/arel'
 
 # Load local gems according to Refinery developer preference.
 if File.exist?(File.expand_path('../.gemfile', __FILE__))
