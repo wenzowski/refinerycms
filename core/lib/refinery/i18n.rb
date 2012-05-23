@@ -5,6 +5,14 @@ module Refinery
       def enabled?
         false
       end
+
+      def default_locale
+        :en
+      end
+
+      def default_frontend_locale
+        :en
+      end
     end
   end
 end
