@@ -11,6 +11,7 @@ gem 'globalize3', github: 'svenfuchs/globalize3'
 gem 'paper_trail', github: 'parndt/paper_trail', branch: 'rails4'
 gem 'devise', github: 'parndt/devise', branch: 'rails4'
 gem 'awesome_nested_set', github: 'collectiveidea/awesome_nested_set'
+gem 'orm_adapter', github: 'ianwhite/orm_adapter'
 
 # Database Configuration
 unless ENV['TRAVIS']
