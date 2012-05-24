@@ -102,7 +102,7 @@ gem 'jquery-rails', '~> 2.0.0'
 # gem 'fog'
 
 # Bundle edge Rails instead:
-gem 'rails', github: 'rails/rails'
+gem 'rails', github: 'parndt/rails', branch: 'rails_root_should_be_join_able'
 if ENV['JOURNEY']
   gem 'journey', path: ENV['JOURNEY']
 else
