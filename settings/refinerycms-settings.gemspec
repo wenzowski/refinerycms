@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.version           = %q{1.0.11}
   s.summary           = %q{Settings engine for Refinery CMS}
   s.description       = %q{The default settings engine that is required by Refinery CMS core. Adds programmer creatable, user editable settings for each engine.}
-  s.date              = %q{2012-05-18}
+  s.date              = %q{2012-05-29}
   s.email             = %q{info@refinerycms.com}
   s.homepage          = %q{http://refinerycms.com}
   s.rubyforge_project = %q{refinerycms}
@@ -15,7 +15,7 @@ Gem::Specification.new do |s|
   s.require_paths     = %w(lib)
   s.executables       = %w()
 
-  s.add_dependency    'activerecord', '~> 3.0.10'
+  s.add_dependency    'activerecord', '= 3.0.13.rc1'
 
   s.files             = [
     'app',

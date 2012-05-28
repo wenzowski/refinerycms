@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.version           = %q{1.0.11}
   s.summary           = %q{Images engine for Refinery CMS}
   s.description       = %q{Handles all image upload and processing functionality in Refinery CMS.}
-  s.date              = %q{2012-05-18}
+  s.date              = %q{2012-05-29}
   s.email             = %q{info@refinerycms.com}
   s.homepage          = %q{http://refinerycms.com}
   s.rubyforge_project = %q{refinerycms}
@@ -91,6 +91,7 @@ Gem::Specification.new do |s|
     'license.md',
     'refinerycms-images.gemspec',
     'spec',
+    'spec/lib',
     'spec/models',
     'spec/models/image_spec.rb',
     'spec/uploads',
@@ -98,7 +99,7 @@ Gem::Specification.new do |s|
   ]
 
   s.add_dependency 'refinerycms-core', '= 1.0.11'
-  s.add_dependency 'activerecord',     '~> 3.0.10'
+  s.add_dependency 'activerecord',     '= 3.0.13.rc1'
   s.add_dependency 'dragonfly',        '~> 0.9.0'
   s.add_dependency 'rack-cache',       '>= 0.5.3'
 end
