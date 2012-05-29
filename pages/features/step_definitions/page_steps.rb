@@ -38,7 +38,7 @@ end
 
 Given /^the page titled "?([^\"]*)"? is fully translated$/ do |title|
   page = Page.by_title(title).first
-  Refinery::I18n.frontend_locales.each do |locale|
+  ::Refinery::I18n.frontend_locales.each do |locale|
     old_locale = Thread.current[:globalize_locale]
     Thread.current[:globalize_locale] = locale
     page.title = title
