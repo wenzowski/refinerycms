@@ -2,6 +2,8 @@ source 'http://rubygems.org'
 
 gemspec
 
+gem 'rails', github: 'parndt/rails', branch: 'fix_regression'
+
 # Add i18n support.
 gem 'refinerycms-i18n', '~> 2.0.0'
 
