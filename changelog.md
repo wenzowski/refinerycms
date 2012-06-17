@@ -4,6 +4,7 @@
 
 ## 2.0.6 [unreleased]
 * Fixed bug with 404 page not honoring custom view/layout template. [#1746](https://github.com/resolve/refinerycms/pull/1746). [Uģis Ozols](https://github.com/ugisozols)
+* Fixed Rack::Cache middleware bug by making rack-cache a core dependency. Added Refinery::Cache module with extensive notes about caching configurations. [#1736](https://github.com/resolve/refinerycms/issues/1736). [Alexander Wenzowski](https://github.com/wenzowski)
 
 ## 2.0.5 [11 June 2012]
 * Now extension/form generators will add all attributes to attr_accessible. [#1613](https://github.com/resolve/refinerycms/pull/1613). [Uģis Ozols](https://github.com/ugisozols)

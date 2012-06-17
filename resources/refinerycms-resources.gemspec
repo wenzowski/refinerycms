@@ -21,7 +21,6 @@ Gem::Specification.new do |s|
   s.files             = `git ls-files`.split("\n")
   s.test_files        = `git ls-files -- spec/*`.split("\n")
 
-  s.add_dependency 'dragonfly',        '~> 0.9.8'
-  s.add_dependency 'rack-cache',       '>= 0.5.3'
+  s.add_dependency 'dragonfly',        '~> 0.9.12'
   s.add_dependency 'refinerycms-core', version
 end
