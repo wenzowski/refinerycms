@@ -2,11 +2,6 @@
 # Injects Rack::Cache into the stack with appropriate settings for all
 # environments
 #
-# Refinery::Cache uses 3 MemoryStore caches totaling to 128MB by default.
-#
-# In the test environment, a NullStore is configured to automatically
-# discard all cached objects (avoids inconsistency issues).
-#
 # Production Use
 # ==============
 #
@@ -17,25 +12,20 @@
 #
 # Disk Storage
 # ------------
-# Disk Storage will grow until the disk is full unless you periodically delete
-# old entries. Each cache should be configured with a different filesystem
-# location to prevent collisions. Configuration example:
+# The default disk storage will grow until the disk is full unless old entries
+# are deleted periodically. This is not an issue for providers with ephemeral
+# filesystems like Heroku's Cedar stack.
 #
-#     Rails.application.config.cache_store = :file_store, "#{Rails.root}/tmp/cache/rails"
-#     Rails.application.config.action_dispatch.rack_cache = {
-#       :metastore    => URI.encode("file:#{Rails.root}/tmp/cache/rack/meta"),
-#       :entitystore  => URI.encode("file:#{Rails.root}/tmp/cache/rack/body"),
-#       :allow_reload => false
-#     }
+# Each cache must have a different path to prevent collisions.
 #
 # Memcached
 # ---------
-# In production a memcached instance may be configured to store the frequently-
+# In production, a memcached instance is a good way to store the frequently-
 # accessed MetaStore, which will reduce the overall latency of the cache. It is
-# inadvisable to configure memcached as the EntityStore, since Rack::Cache may
+# inadvisable to configure memcached as the EntityStore, since Rack::Cache will
 # use this store for large objects. Dragonfly objects, for instance, will be
 # cached in the EntityStore, whatever their size may be. Refinery::Images and
-# Refinery::Resources both depend on Dragonfly.
+# Refinery::Resources both use Dragonfly.
 #
 # Example configuration of memcached and disk storage using the 'dalli' gem:
 #
@@ -75,33 +65,34 @@ module Refinery
       end
 
       ##
-      # A sane default MetaStore for Rack::Cache.
+      # A default MetaStore for Rack::Cache.
       #
       # This is likely to be accessed frequently, so a low-latency cache store
-      # is advised.
+      # like memcached is advised in production.
+      #
+      # Why isn't this being stored in memory?
+      # > from http://rtomayko.github.com/rack-cache/storage
+      # > heap storage provides no mechanism for purging unused entries so
+      # > memory use is guaranteed to exceed that available, given enough time
+      # > and utilization.
       def default_metastore
-        if ::Rails.env.test?
-          ::ActiveSupport::Cache::NullStore.new
-        else
-          ::ActiveSupport::Cache::MemoryStore.new(:size => 32.megabytes)
-        end
+        ::URI.encode("file:#{Rails.root}/tmp/cache/rack/meta")
       end
 
       ##
-      # A sane default EntityStore for Rack::Cache.
+      # A default EntityStore for Rack::Cache.
       #
-      # This should definitely be larger than a single object expected
-      # to be stored (by default Refinery::Resources may be up to 50MB).
+      # Disk Storage will grow until the disk is full unless old entries are
+      # deleted periodically.
+      #
+      # By default Refinery::Resources may be up to 50MB and are cached in the
+      # EntityStore.
       #
       # The Rack::Cache documentation suggests that disk storage is a good fit,
       # since the EntityStore can grow quite large, and it is not as sensitive
       # to latency as the MetaStore.
       def default_entitystore
-        if ::Rails.env.test?
-          ::ActiveSupport::Cache::NullStore.new
-        else
-          ::ActiveSupport::Cache::MemoryStore.new(:size => 64.megabytes)
-        end
+        ::URI.encode("file:#{Rails.root}/tmp/cache/rack/body")
       end
 
       private :default_metastore, :default_entitystore,
