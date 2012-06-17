@@ -69,14 +69,8 @@ module Refinery
       #
       # This is likely to be accessed frequently, so a low-latency cache store
       # like memcached is advised in production.
-      #
-      # Why isn't this being stored in memory?
-      # > from http://rtomayko.github.com/rack-cache/storage
-      # > heap storage provides no mechanism for purging unused entries so
-      # > memory use is guaranteed to exceed that available, given enough time
-      # > and utilization.
       def default_metastore
-        ::URI.encode("file:#{Rails.root}/tmp/cache/rack/meta")
+        "rails:/"
       end
 
       ##
@@ -85,14 +79,10 @@ module Refinery
       # Disk Storage will grow until the disk is full unless old entries are
       # deleted periodically.
       #
-      # By default Refinery::Resources may be up to 50MB and are cached in the
-      # EntityStore.
-      #
-      # The Rack::Cache documentation suggests that disk storage is a good fit,
-      # since the EntityStore can grow quite large, and it is not as sensitive
-      # to latency as the MetaStore.
+      # Refinery::Resources may be up to 50MB by default and are cached in the
+      # EntityStore by Dragonfly.
       def default_entitystore
-        ::URI.encode("file:#{Rails.root}/tmp/cache/rack/body")
+        "rails:/"
       end
 
       private :default_metastore, :default_entitystore,
